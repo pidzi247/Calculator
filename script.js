@@ -1,3 +1,10 @@
+let display = document.getElementById('display');
+let numbers = document.querySelectorAll('.num');
+
+let displayValue = 0;
+
+
+
 //Operator functions
 function addition(n1, n2) {
   return n1 + n2;
@@ -24,4 +31,13 @@ function operate(operator, n1, n2) {
       return addition(n1, n2);
       break;
   }
+}
+
+numbers.forEach(num => {
+  num.addEventListener('click', updateDisplay);
+});
+
+function updateDisplay(e) {
+  display.textContent = e.target.textContent;
+  displayValue = e.target.textContent;
 }

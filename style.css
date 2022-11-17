@@ -10,7 +10,7 @@
   height: 100vh;
 }
 
-.calculator-frame {
+#calculator-frame {
   width: 400px;
   height: 600px;
   background-color: aquamarine;
@@ -21,7 +21,7 @@
   justify-content: space-around;
 }
 
-.display {
+#display {
   font-size: 20px;
   background-color: antiquewhite;
   height: 50px;
@@ -33,7 +33,7 @@
   text-align: end;
 }
 
-.keyboard {
+#keyboard {
   height: 70%;
   font-size: 20px;
   margin: 10px;
@@ -52,6 +52,5 @@
   height: 50px;
   width: 60px;
   line-height: 50px;
-  border: 1px solid black;
   border-radius: 5px;
 }
