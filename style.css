@@ -22,16 +22,32 @@
 }
 
 #display {
-  font-size: 20px;
   background-color: antiquewhite;
-  height: 50px;
-  line-height: 50px;
+  height: 60px;
   margin: 10px;
   padding-right: 10px;
   border: 1px solid black;
   border-radius: 20px;
-  text-align: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+#upper-number,
+#lower-number {
+  height: 24px;
+  text-align: end;
+  line-height: 24px;
+}
+
+#upper-number {
+  font-size: 16px;
+}
+
+#lower-number {
+  font-size: 24px;
+}
+
 
 #keyboard {
   height: 70%;

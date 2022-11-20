@@ -11,7 +11,10 @@
 <body>
   <div class="container">
     <div id="calculator-frame">
-      <div id="display">0.0</div>
+      <div id="display">
+        <div id="upper-number"></div>
+        <div id="lower-number">0</div>
+      </div>
       <div id="keyboard">
         <button class="keys num">1</button>
         <button class="keys num">2</button>
@@ -27,10 +30,10 @@
         <button class="keys operator">*</button>
         <button class="keys">.</button>
         <button class="keys num">0</button>
-        <button class="keys">=</button>
+        <button class="keys" id="equals">=</button>
         <button class="keys operator">/</button>
-        <button class="keys">A/C</button>
-        <button class="keys">%</button>
+        <button class="keys" id="clear">A/C</button>
+        <button class="keys" id="percentage">%</button>
       </div>
     </div>
   </div>
