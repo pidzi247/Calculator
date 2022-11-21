@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Nanum Pen Script', cursive;
 }
 
 .container {
@@ -8,65 +9,100 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  
 }
 
 #calculator-frame {
-  width: 400px;
-  height: 600px;
+  width: 300px;
+  height: 450px;
   background-color: aquamarine;
   border-radius: 20px;
-  border: 2px black solid;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
 #display {
-  background-color: antiquewhite;
-  height: 60px;
-  margin: 10px;
+  background-color: black;
+  color: white;
   padding-right: 10px;
-  border: 1px solid black;
-  border-radius: 20px;
+  border-radius: 18px 18px 0 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex-grow: 1;
 }
 
 #upper-number,
 #lower-number {
-  height: 24px;
+  height: 40px;
   text-align: end;
-  line-height: 24px;
+  line-height: 40px;
 }
 
 #upper-number {
-  font-size: 16px;
+  font-size: 40px;
 }
 
 #lower-number {
-  font-size: 24px;
+  font-size: 74px;
+  font-weight: bold;
 }
 
 
 #keyboard {
   height: 70%;
   font-size: 20px;
-  margin: 10px;
-  border: 1px solid black;
-  background-color: antiquewhite;
+  border: 1px solid grey;
+  background-color: whitesmoke;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
   text-align: center;
-  gap: 20px;
-  border-radius: 20px;
+  border-radius: 0 0 18px 18px;
+  justify-content: space-around;
+
 }
 
 .keys {
-  height: 50px;
+  font-size: 40px;
   width: 60px;
   line-height: 50px;
-  border-radius: 5px;
+  flex-grow: 1;
+  background-color: whitesmoke;;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.1);
 }
+
+.operator {
+  background-color: rgba(71, 200, 219, 0.5);
+}
+
+.big-item {
+  border-radius:0 0 20px 0;
+  border: none;
+  font-size: 70px;
+  flex-grow: 1;
+}
+
+.num {
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.1);
+}
+
+#equals {
+  background-color: rgba(175, 250, 178, 0.5)
+}
+
+#clear {
+  background-color: rgba(219, 57, 57, 0.5);
+  border-radius: 0 0 0 20px;
+}
+
+.keys:active {
+  color: gray;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  text-decoration-color: rgba(0, 0, 0, 0.5);
+}
+
