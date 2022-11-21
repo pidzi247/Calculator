@@ -128,7 +128,3 @@ function result(e) {
   lowerNum.textContent = evaluation;
   equalSignClicked = true;
 }
-
-function percentage(e) {
-  storedValue /= 100;
-}
