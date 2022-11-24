@@ -13,10 +13,11 @@ const clear = document.getElementById('clear');
 const point = document.getElementById('point');
 
 //Variables to hold data for calculation and clearing data
-let firstNum = null;
+let firstNum = 0;
 let secondNum = null;
 let storedOperator = null;
 let equalSignClicked = false;
+let decimalSignClicked = false;
 let evaluation = null;
 
 /////////////////////////////////////////////////
@@ -82,6 +83,9 @@ function calculate(operator, n1, n2) {
 
 //Function which updates proper display sections with their respective user inputs
 function updateDisplay(e) {
+  if(equalSignClicked) {
+    lowerNum.textContent = "";
+  }
   if(!storedOperator) {
     if(lowerNum.textContent === "0") {
     //If there is "0" in the bottom part of display it gets deleted
@@ -90,7 +94,7 @@ function updateDisplay(e) {
     lowerNum.textContent += e.target.textContent;
   } else {
     //Conditional to prevent string concatenation on evaluated operation
-    if(parseFloat(lowerNum.textContent) === firstNum) {
+    if(parseFloat(lowerNum.textContent) === parseFloat(firstNum)) {
       lowerNum.textContent = "";
     }
     lowerNum.textContent += e.target.textContent;
@@ -106,6 +110,9 @@ function operate(e) {
   //operation as firstNum
   if(equalSignClicked) {
     storedOperator = null;
+  }
+  if(decimalSignClicked) {
+    decimalSignClicked = false;
   }
   if(!storedOperator) {
     firstNum = parseFloat(lowerNum.textContent);
@@ -128,7 +135,8 @@ function reset() {
   upperNum.innerHTML = "";
   lowerNum.textContent = "0";
   storedOperator = null;
-  firstNum = null;
+  firstNum = 0;
+  secondNum = null;
   evaluation = null;
 }
 
@@ -141,6 +149,18 @@ function result(e) {
 }
 
 function decimal(e) {
-  secondNum += e.target.textContent;
-  lowerNum.textContent = secondNum;
+  if(!firstNum) {
+    if(firstNum % 1 !== 0){
+      return;
+    }
+    firstNum = lowerNum.textContent;
+    firstNum += e.target.textContent;
+    lowerNum.textContent = firstNum;
+  } else {
+    if(secondNum % 1 !== 0) {
+      return;
+    } 
+    secondNum += e.target.textContent;
+    lowerNum.textContent = secondNum;
+  }
 }
