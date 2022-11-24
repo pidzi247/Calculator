@@ -13,7 +13,8 @@ const clear = document.getElementById('clear');
 const point = document.getElementById('point');
 
 //Variables to hold data for calculation and clearing data
-let storedValue = 0;
+let firstNum = null;
+let secondNum = null;
 let storedOperator = null;
 let equalSignClicked = false;
 let evaluation = null;
@@ -34,6 +35,8 @@ operators.forEach(operator => {
 equals.addEventListener('click', result);
 
 clear.addEventListener('click', reset);
+
+point.addEventListener('click', decimal);
 
 
 /////////////////////////////////////////////////
@@ -79,16 +82,19 @@ function calculate(operator, n1, n2) {
 
 //Function which updates proper display sections with their respective user inputs
 function updateDisplay(e) {
-  if(lowerNum.textContent === "0") {
+  if(!storedOperator) {
+    if(lowerNum.textContent === "0") {
     //If there is "0" in the bottom part of display it gets deleted
     lowerNum.innerHTML = "";
+    }
     lowerNum.textContent += e.target.textContent;
   } else {
     //Conditional to prevent string concatenation on evaluated operation
-    if(parseInt(lowerNum.textContent) === storedValue) {
+    if(parseFloat(lowerNum.textContent) === firstNum) {
       lowerNum.textContent = "";
     }
     lowerNum.textContent += e.target.textContent;
+    secondNum = parseFloat(lowerNum.textContent);
   }
   
 }
@@ -97,21 +103,22 @@ function updateDisplay(e) {
 function operate(e) {
   //Check for "light" reset of display so when after you hit equal sign,
   //you can then continue with another operations, taking the result of previous 
-  //operation as storedValue(aka first number)
+  //operation as firstNum
   if(equalSignClicked) {
     storedOperator = null;
   }
   if(!storedOperator) {
-    storedValue = parseInt(lowerNum.textContent);
+    firstNum = parseFloat(lowerNum.textContent);
     storedOperator = e.target.textContent;
-    upperNum.textContent = `${storedValue} ${storedOperator}`;  
+    upperNum.textContent = `${firstNum} ${storedOperator}`;  
   } else {
-    evaluation = calculate(storedOperator, storedValue, parseInt(lowerNum.textContent))
+    secondNum = parseFloat(lowerNum.textContent);
+    evaluation = calculate(storedOperator, firstNum, secondNum);
     upperNum.textContent = `${evaluation} ${storedOperator}`;
-    lowerNum.textContent = evaluation;
-    storedValue = evaluation;
+    lowerNum.textContent = evaluation.toFixed(2);
+    firstNum = evaluation.toFixed(2);
     storedOperator = e.target.textContent;
-    upperNum.textContent = `${storedValue} ${storedOperator}`;
+    upperNum.textContent = `${firstNum} ${storedOperator}`;
   }
   equalSignClicked = false;
 }
@@ -121,18 +128,19 @@ function reset() {
   upperNum.innerHTML = "";
   lowerNum.textContent = "0";
   storedOperator = null;
-  storedValue = null;
+  firstNum = null;
   evaluation = null;
 }
 
 //Handles logic when user hits 'equal' sign and provides visual clue when its hit
 function result(e) {
-  upperNum.textContent = `${storedValue} ${storedOperator} ${lowerNum.textContent} ${e.target.textContent}`;
-  evaluation = calculate(storedOperator, storedValue, parseInt(lowerNum.textContent))
-  lowerNum.textContent = evaluation;
+  upperNum.textContent = `${firstNum} ${storedOperator} ${secondNum} ${e.target.textContent}`;
+  evaluation = calculate(storedOperator, firstNum, secondNum)
+  lowerNum.textContent = evaluation.toFixed(2);
   equalSignClicked = true;
 }
 
-function decimal() {
-  
+function decimal(e) {
+  secondNum += e.target.textContent;
+  lowerNum.textContent = secondNum;
 }

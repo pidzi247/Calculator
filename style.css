@@ -79,7 +79,7 @@
 }
 
 .big-item {
-  border-radius:0 0 20px 0;
+  border-radius:0 0 17px 0;
   border: none;
   font-size: 70px;
   flex-grow: 1;
@@ -96,7 +96,7 @@
 
 #clear {
   background-color: rgba(219, 57, 57, 0.5);
-  border-radius: 0 0 0 20px;
+  border-radius: 0 0 0 17px;
 }
 
 .keys:active {
