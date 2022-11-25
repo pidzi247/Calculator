@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Nanum Pen Script', cursive;
+  font-family: 'Orbitron', sans-serif;
 }
 
 .container {
@@ -41,11 +41,11 @@
 }
 
 #upper-number {
-  font-size: 40px;
+  font-size: 32px;
 }
 
 #lower-number {
-  font-size: 74px;
+  font-size: 50px;
   font-weight: bold;
 }
 
@@ -64,7 +64,7 @@
 }
 
 .keys {
-  font-size: 40px;
+  font-size: 25px;
   width: 60px;
   line-height: 50px;
   flex-grow: 1;
@@ -81,7 +81,7 @@
 .big-item {
   border-radius:0 0 17px 0;
   border: none;
-  font-size: 70px;
+  font-size: 50px;
   flex-grow: 1;
 }
 

@@ -11,6 +11,7 @@ const operators = document.querySelectorAll('.operator');
 const equals = document.getElementById('equals');
 const clear = document.getElementById('clear');
 const point = document.getElementById('point');
+const signMinusPlus = document.getElementById('plus-minus');
 
 //Variables to hold data for calculation and clearing data
 let firstNum = 0;
@@ -39,6 +40,8 @@ clear.addEventListener('click', reset);
 
 point.addEventListener('click', decimal);
 
+signMinusPlus.addEventListener('click', flipSign);
+
 
 /////////////////////////////////////////////////
 //FUNCTION SECTION!!!
@@ -58,6 +61,10 @@ function multiply(n1, n2) {
 }
 
 function division(n1, n2) {
+  if(n2 === 0) {
+    lowerNum.textContent = "";
+    return upperNum.textContent = "You cannot divide by zero";
+  }
   return n1 / n2;
 }
 
@@ -83,8 +90,12 @@ function calculate(operator, n1, n2) {
 
 //Function which updates proper display sections with their respective user inputs
 function updateDisplay(e) {
+  if(upperNum.textContent === "Invalid input!") {
+    upperNum.textContent = "";
+  }
   if(equalSignClicked) {
     lowerNum.textContent = "";
+    equalSignClicked = false;
   }
   if(!storedOperator) {
     if(lowerNum.textContent === "0") {
@@ -119,15 +130,17 @@ function operate(e) {
     storedOperator = e.target.textContent;
     upperNum.textContent = `${firstNum} ${storedOperator}`;  
   } else {
+    if(secondNum === 0 && storedOperator === "/") {
+      lowerNum.textContent = "You cannot divide by zero!";
+    }
     secondNum = parseFloat(lowerNum.textContent);
     evaluation = calculate(storedOperator, firstNum, secondNum);
     upperNum.textContent = `${evaluation} ${storedOperator}`;
-    lowerNum.textContent = evaluation.toFixed(2);
-    firstNum = evaluation.toFixed(2);
+    lowerNum.textContent = Math.round((evaluation + Number.EPSILON) * 100) / 100;
+    firstNum = Math.round((evaluation + Number.EPSILON) * 100) / 100;
     storedOperator = e.target.textContent;
     upperNum.textContent = `${firstNum} ${storedOperator}`;
   }
-  equalSignClicked = false;
 }
 
 //Clears all the necessary data for user to start over fresh and clean
@@ -138,29 +151,36 @@ function reset() {
   firstNum = 0;
   secondNum = null;
   evaluation = null;
+  decimalSignClicked = false;
+  equalSignClicked = false;
 }
 
 //Handles logic when user hits 'equal' sign and provides visual clue when its hit
 function result(e) {
+  if(!firstNum || !secondNum) {
+    reset();
+    return upperNum.textContent = "Invalid input!"
+  }
   upperNum.textContent = `${firstNum} ${storedOperator} ${secondNum} ${e.target.textContent}`;
   evaluation = calculate(storedOperator, firstNum, secondNum)
-  lowerNum.textContent = evaluation.toFixed(2);
+  lowerNum.textContent = Math.round((evaluation + Number.EPSILON) * 100) / 100;
   equalSignClicked = true;
 }
 
 function decimal(e) {
-  if(!firstNum) {
-    if(firstNum % 1 !== 0){
-      return;
-    }
-    firstNum = lowerNum.textContent;
-    firstNum += e.target.textContent;
-    lowerNum.textContent = firstNum;
+  if(lowerNum.textContent.includes(".")) {
+    return ;
   } else {
-    if(secondNum % 1 !== 0) {
-      return;
-    } 
-    secondNum += e.target.textContent;
-    lowerNum.textContent = secondNum;
+    lowerNum.textContent += e.target.textContent;
+  }
+}
+
+function flipSign() {
+  if(!firstNum) {
+    lowerNum.textContent *= -1;
+    firstNum = lowerNum.textContent;
+  } else {
+    lowerNum.textContent *= -1;
+    secondNum = lowerNum.textContent;
   }
 }
