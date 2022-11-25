@@ -6,11 +6,26 @@
 
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   height: 100vh;
   background: rgb(238,174,202);
   background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+
+.title {
+  height: 100px;
+  text-align: center;
+  font-size: 30px;
+  margin-top: 25px;
+}
+
+span {
+  font-weight: 900;
+  text-decoration-line: underline;
+  text-decoration-style: double;
+  color: rgba(219, 57, 57, 1);
 }
 
 /*Main frame of the calculator object*/
@@ -22,6 +37,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-top: 50px;
 }
 
 /*Entire display part with black background*/
@@ -107,4 +123,12 @@
   font-size: 50px;
 }
 
-
+/*Footer section with links*/
+.footer {
+  width: 750px;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: auto;
+  font-size: 10px;
+  padding: 10px;
+}
