@@ -61,8 +61,8 @@ function multiply(n1, n2) {
 }
 
 function division(n1, n2) {
-  if(n2 === 0) {
-    lowerNum.textContent = "";
+  if(n2 === 0) { // Check to prevent dividing a number by 0
+    lowerNum.innerHTML = "";
     return upperNum.textContent = "You cannot divide by zero";
   }
   return n1 / n2;
@@ -98,15 +98,13 @@ function updateDisplay(e) {
     equalSignClicked = false;
   }
   if(!storedOperator) {
-    if(lowerNum.textContent === "0") {
-    //If there is "0" in the bottom part of display it gets deleted
+    if(lowerNum.textContent === "0") { //If there is "0" in the bottom part of display it gets deleted
     lowerNum.innerHTML = "";
     }
     lowerNum.textContent += e.target.textContent;
   } else {
-    //Conditional to prevent string concatenation on evaluated operation
-    if(parseFloat(lowerNum.textContent) === parseFloat(firstNum)) {
-      lowerNum.textContent = "";
+    if(parseFloat(lowerNum.textContent) === parseFloat(firstNum)) { //Conditional to prevent string concatenation on already evaluated operation
+      lowerNum.textContent = "";                    
     }
     lowerNum.textContent += e.target.textContent;
     secondNum = parseFloat(lowerNum.textContent);
@@ -116,24 +114,26 @@ function updateDisplay(e) {
 
 //Handles actual logic when and how to call operate function
 function operate(e) {
-  //Check for "light" reset of display so when after you hit equal sign,
-  //you can then continue with another operations, taking the result of previous 
-  //operation as firstNum
+
   if(equalSignClicked) {
+    //Check for "light" reset of display so when after you hit equal sign,
+    //you can then continue with another operations, taking the result of previous 
+    //operation as firstNum
     storedOperator = null;
   }
   if(decimalSignClicked) {
     decimalSignClicked = false;
   }
   if(!storedOperator) {
+    //If no operator was hit before, we store a numb in lower display and operator as well
     firstNum = parseFloat(lowerNum.textContent);
     storedOperator = e.target.textContent;
     upperNum.textContent = `${firstNum} ${storedOperator}`;  
   } else {
-    if(secondNum === 0 && storedOperator === "/") {
-      lowerNum.textContent = "You cannot divide by zero!";
-    }
     secondNum = parseFloat(lowerNum.textContent);
+    if(secondNum === 0 && storedOperator === "/") {
+      return division(firstNum, secondNum);
+    }
     evaluation = calculate(storedOperator, firstNum, secondNum);
     upperNum.textContent = `${evaluation} ${storedOperator}`;
     lowerNum.textContent = Math.round((evaluation + Number.EPSILON) * 100) / 100;
@@ -157,9 +157,12 @@ function reset() {
 
 //Handles logic when user hits 'equal' sign and provides visual clue when its hit
 function result(e) {
-  if(!firstNum || !secondNum) {
+  if(firstNum === null || secondNum === null) {
     reset();
     return upperNum.textContent = "Invalid input!"
+  }
+  if(secondNum === 0 && storedOperator === "/") {
+    return division(firstNum, secondNum);
   }
   upperNum.textContent = `${firstNum} ${storedOperator} ${secondNum} ${e.target.textContent}`;
   evaluation = calculate(storedOperator, firstNum, secondNum)
