@@ -9,9 +9,11 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  
+  background: rgb(238,174,202);
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
 }
 
+/*Main frame of the calculator object*/
 #calculator-frame {
   width: 300px;
   height: 550px;
@@ -22,6 +24,7 @@
   justify-content: space-around;
 }
 
+/*Entire display part with black background*/
 #display {
   background-color: black;
   color: white;
@@ -33,14 +36,13 @@
   flex-grow: 1;
 }
 
+/*Inner part of display consisting of two blocks, upper and lower row*/
 #upper-number,
 #lower-number {
   height: 40px;
   text-align: end;
   line-height: 40px;
   margin-bottom: 20px;
-
-
 }
 
 #upper-number {
@@ -52,7 +54,7 @@
   font-weight: bold;
 }
 
-
+/*Entire keyboard section*/
 #keyboard {
   height: 65%;
   font-size: 20px;
@@ -63,8 +65,8 @@
   text-align: center;
   border-radius: 0 0 18px 18px;
   justify-content: space-around;
-
 }
+
 
 .keys {
   font-size: 25px;
@@ -77,15 +79,15 @@
   border-color: rgba(0, 0, 0, 0.1);
 }
 
-.operator {
-  background-color: rgba(71, 200, 219, 0.5);
+.keys:active {
+  color: gray;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  text-decoration-color: rgba(0, 0, 0, 0.5);
 }
 
-.big-item {
-  border-radius:0 0 17px 0;
-  border: none;
-  font-size: 50px;
-  flex-grow: 1;
+.operator {
+  background-color: rgba(71, 200, 219, 0.5);
 }
 
 .num {
@@ -94,18 +96,15 @@
 }
 
 #equals {
-  background-color: rgba(175, 250, 178, 0.5)
+  background-color: rgba(175, 250, 178, 0.5);
+  border-radius:0 0 17px 0;
+  font-size: 50px;
 }
 
 #clear {
   background-color: rgba(219, 57, 57, 0.5);
   border-radius: 0 0 0 17px;
+  font-size: 50px;
 }
 
-.keys:active {
-  color: gray;
-  border: none;
-  background-color: rgba(0, 0, 0, 0.1);
-  text-decoration-color: rgba(0, 0, 0, 0.5);
-}
 

@@ -131,13 +131,13 @@ function operate(e) {
     upperNum.textContent = `${firstNum} ${storedOperator}`;  
   } else {
     secondNum = parseFloat(lowerNum.textContent);
-    if(secondNum === 0 && storedOperator === "/") {
+    if(secondNum === 0 && storedOperator === "/") { //Prevents dividing by zero and pops a message
       return division(firstNum, secondNum);
     }
     evaluation = calculate(storedOperator, firstNum, secondNum);
     upperNum.textContent = `${evaluation} ${storedOperator}`;
-    lowerNum.textContent = Math.round((evaluation + Number.EPSILON) * 100) / 100;
-    firstNum = Math.round((evaluation + Number.EPSILON) * 100) / 100;
+    lowerNum.textContent = roundDecimal(evaluation);
+    firstNum = roundDecimal(evaluation);
     storedOperator = e.target.textContent;
     upperNum.textContent = `${firstNum} ${storedOperator}`;
   }
@@ -166,10 +166,11 @@ function result(e) {
   }
   upperNum.textContent = `${firstNum} ${storedOperator} ${secondNum} ${e.target.textContent}`;
   evaluation = calculate(storedOperator, firstNum, secondNum)
-  lowerNum.textContent = Math.round((evaluation + Number.EPSILON) * 100) / 100;
+  lowerNum.textContent = roundDecimal(evaluation);
   equalSignClicked = true;
 }
 
+//Gives a number ability to make it a decimal number
 function decimal(e) {
   if(lowerNum.textContent.includes(".")) {
     return ;
@@ -178,6 +179,7 @@ function decimal(e) {
   }
 }
 
+//Changes the number to positive/negative number
 function flipSign() {
   if(!firstNum) {
     lowerNum.textContent *= -1;
@@ -186,4 +188,9 @@ function flipSign() {
     lowerNum.textContent *= -1;
     secondNum = lowerNum.textContent;
   }
+}
+
+//Helper function to round the number to 2 decimal points
+function roundDecimal(result) {
+  return Math.round((result + Number.EPSILON) * 100) / 100;
 }
