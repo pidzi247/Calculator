@@ -18,7 +18,7 @@ html {
 }
 
 /*Main frame of the calculator object*/
-#calculator-frame {
+#calculatorFrame {
   width: 100%;
   height: 100vh;
   background-color: aquamarine;
@@ -41,19 +41,19 @@ html {
 }
 
 /*Inner part of display consisting of two blocks, upper and lower row*/
-#upper-number,
-#lower-number {
+#upperNumber,
+#lowerNumber {
   height: 40px;
   text-align: end;
   line-height: 40px;
   margin-bottom: 20px;
 }
 
-#upper-number {
+#upperNumber {
   font-size: 32px;
 }
 
-#lower-number {
+#lowerNumber {
   font-size: 50px;
   font-weight: bold;
 }
@@ -133,7 +133,7 @@ html {
     align-items: center;
   }
   
-  #calculator-frame {
+  #calculatorFrame {
     margin-top: 50px;
     height: 50%;
   }
